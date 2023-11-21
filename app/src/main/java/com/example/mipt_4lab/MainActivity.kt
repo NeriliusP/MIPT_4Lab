@@ -1,6 +1,11 @@
 package com.example.mipt_4lab
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,30 +22,34 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MIPT_4LabTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+
+
             }
         }
     }
-}
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        Log.d("MainActivity", "onCreateOptionsMenu")
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.notes_menu, menu)
+        return true
+    }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("MainActivity", "onOptionsItemSelected")
+        return when (item.itemId)
+        {
+            R.id.add_note -> {
+                val intent = Intent(this, AddNote::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.remove_note ->{
+                val intent = Intent(this, RemoveNote::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MIPT_4LabTheme {
-        Greeting("Android")
     }
 }
