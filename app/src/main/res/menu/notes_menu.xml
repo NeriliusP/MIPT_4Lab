@@ -3,8 +3,10 @@
 
     <item
         android:id="@+id/add_note"
+        android:icon="@android:drawable/ic_menu_delete"
         android:title="Add note" />
     <item
         android:id="@+id/remove_note"
+        android:icon="@android:drawable/ic_menu_edit"
         android:title="Remove note" />
 </menu>
